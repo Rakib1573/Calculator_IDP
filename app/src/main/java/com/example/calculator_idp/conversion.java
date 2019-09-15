@@ -50,12 +50,12 @@ public class conversion extends AppCompatActivity {
             int Dollar = Integer.parseInt(dollar.getText().toString());
             Double Taka = 84.50;
             double result = Taka * Dollar;
-            dbCon.setResult(taka.getText().toString().trim());
+            dbCon.setResult(dollar.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
             taka = (EditText) findViewById(R.id.etTaka);
             taka.setText(Double.toString(result) + " Taka");
-            dbCon.setResult(dollar.getText().toString().trim());
+            dbCon.setResult(taka.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
         }
