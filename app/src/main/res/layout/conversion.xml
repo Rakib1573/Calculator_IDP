@@ -56,4 +56,54 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etkg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint=" kg"
+            android:textSize="20sp"
+            android:backgroundTint="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" = "
+            android:textSize="20sp"
+            android:backgroundTint="@color/colorAccent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etpound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:hint=" pound"
+            android:textSize="20sp"
+            android:backgroundTint="@color/colorAccent"/>
+
+        <Button
+            android:id="@+id/btnConvertpound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Convert"
+            android:textSize="20sp"
+            android:backgroundTint="@color/colorAccent"
+            android:onClick="convertpound"/>
+
+    </LinearLayout>
+
 </LinearLayout>
