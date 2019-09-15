@@ -45,7 +45,8 @@ public class conversion extends AppCompatActivity {
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
         }
-        
+
+
         else if(taka.getText().toString().equals("")){
             dollar = (EditText) findViewById(R.id.etDollar);
             int Dollar = Integer.parseInt(dollar.getText().toString());
