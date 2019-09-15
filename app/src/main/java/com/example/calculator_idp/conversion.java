@@ -16,10 +16,6 @@ public class conversion extends AppCompatActivity {
     private EditText taka;
     private EditText dollar;
     private Button convert;
-
-    private EditText feet;
-    private EditText inch;
-    private Button convertFtInch;
     DatabaseReference reference;
     dbCon dbCon;
 
@@ -30,12 +26,6 @@ public class conversion extends AppCompatActivity {
         convert=(Button)findViewById(R.id.btnConvert);
         taka=(EditText)findViewById(R.id.etTaka);
         dollar=(EditText)findViewById(R.id.etDollar);
-
-        convertFtInch=(Button)findViewById(R.id.btnConvertFtInch);
-        feet=(EditText)findViewById(R.id.etFeet);
-        inch=(EditText)findViewById(R.id.etInch);
-
-
         dbCon=new dbCon();
         reference= FirebaseDatabase.getInstance().getReference().child("dbCon");
     }
@@ -72,41 +62,6 @@ public class conversion extends AppCompatActivity {
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
         }
         };
-
-
-    public void setConvertFtInch(View view) {
-
-        if(inch.getText().toString().equals("")) {
-            feet = (EditText) findViewById(R.id.etFeet);
-            int Feet = Integer.parseInt(taka.getText().toString());
-            Double Inch = 12.0;
-            double result = Feet * Inch;
-            dbCon.setResult(feet.getText().toString().trim());
-            reference.push().setValue(dbCon);
-            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
-            inch = (EditText) findViewById(R.id.etInch);
-            inch.setText(Double.toString(result) + " Inch");
-            dbCon.setResult(inch.getText().toString().trim());
-            reference.push().setValue(dbCon);
-            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
-        }
-
-
-        else if(feet.getText().toString().equals("")){
-            inch = (EditText) findViewById(R.id.etInch);
-            int Inch = Integer.parseInt(inch.getText().toString());
-            Double Feet = 0.083;
-            double result = Feet * Inch;
-            dbCon.setResult(inch.getText().toString().trim());
-            reference.push().setValue(dbCon);
-            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
-            feet = (EditText) findViewById(R.id.etFeet);
-            feet.setText(Double.toString(result) + " Feet");
-            dbCon.setResult(feet.getText().toString().trim());
-            reference.push().setValue(dbCon);
-            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
-        }
-    };
 
     }
 
