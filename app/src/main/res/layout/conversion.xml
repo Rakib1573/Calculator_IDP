@@ -54,6 +54,7 @@
             android:backgroundTint="@color/colorAccent"
             android:onClick="convert"/>
 
+
     </LinearLayout>
 
     <LinearLayout
@@ -102,8 +103,9 @@
             android:text="Convert"
             android:textSize="20sp"
             android:backgroundTint="@color/colorAccent"
-            android:onClick="convert"/>
+            android:onClick="setConvertFtInch"/>
 
     </LinearLayout>
 
 </LinearLayout>
+
