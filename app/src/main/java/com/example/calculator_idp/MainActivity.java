@@ -10,16 +10,20 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 
-public class MainActivity<btn> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
         // IDs of all the numeric buttons
         private int[] numericButtons = {R.id.btnZero, R.id.btnOne, R.id.btnTwo, R.id.btnThree, R.id.btnFour, R.id.btnFive, R.id.btnSix, R.id.btnSeven, R.id.btnEight, R.id.btnNine};
         // IDs of all the operator buttons
@@ -34,7 +38,9 @@ public class MainActivity<btn> extends AppCompatActivity implements NavigationVi
         private boolean lastDot;
         private DrawerLayout drawerLayout;
         private ActionBarDrawerToggle toggle;
-
+        DatabaseReference reference;
+        dbCon dbCon;
+        Button btnEqual;
 
 
     @Override
@@ -47,6 +53,9 @@ public class MainActivity<btn> extends AppCompatActivity implements NavigationVi
             setNumericOnClickListener();
             // Find and set OnClickListener to operator buttons, equal button and decimal point button
             setOperatorOnClickListener();
+            dbCon=new dbCon();
+            reference= FirebaseDatabase.getInstance().getReference().child("dbCon");
+            btnEqual=(Button)findViewById(R.id.btnEqual);
 
             drawerLayout = (DrawerLayout) findViewById(R.id.drawerid);
             NavigationView navigationView =(NavigationView) findViewById(R.id.navid);
@@ -60,6 +69,7 @@ public class MainActivity<btn> extends AppCompatActivity implements NavigationVi
 
 
         }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(toggle.onOptionsItemSelected(item))
@@ -71,7 +81,7 @@ public class MainActivity<btn> extends AppCompatActivity implements NavigationVi
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId()==R.id.homeid){
-            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+            Intent intent = new Intent(MainActivity.this,conversion.class);
             startActivity(intent);
         }
         else if(item.getItemId()==R.id.calculator_id){
@@ -165,7 +175,13 @@ public class MainActivity<btn> extends AppCompatActivity implements NavigationVi
             findViewById(R.id.btnEqual).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    dbCon.setResult(txtScreen.getText().toString().trim());
+                    reference.push().setValue(dbCon);
+                    Toast.makeText(MainActivity.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
                     onEqual();
+                    dbCon.setResult(txtScreen.getText().toString().trim());
+                    reference.push().setValue(dbCon);
+                    Toast.makeText(MainActivity.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
                 }
             });
         }

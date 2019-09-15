@@ -18,9 +18,14 @@
         </activity>
         <activity android:name=".Scientific">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SECONDARY" />
+                />
+            </intent-filter>
+        </activity>
+        <activity android:name=".conversion">
+            <intent-filter>
+                <action android:name="android.intent.action.SECONDARY" />
+                />
             </intent-filter>
         </activity>
     </application>

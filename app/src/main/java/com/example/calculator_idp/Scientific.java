@@ -1,24 +1,20 @@
 package com.example.calculator_idp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 
-public class Scientific extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Scientific extends AppCompatActivity {
     // IDs of all the numeric buttons
     private int[] numericButtons = {R.id.btnZero, R.id.btnOne, R.id.btnTwo, R.id.btnThree, R.id.btnFour, R.id.btnFive, R.id.btnSix, R.id.btnSeven, R.id.btnEight, R.id.btnNine};
     // IDs of all the function buttons
@@ -35,9 +31,10 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
     private boolean stateError;
     // If true, do not allow to add another DOT
     private boolean lastDot;
+    DatabaseReference reference;
+    dbCon dbCon;
+    Button btnEqual;
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,43 +48,9 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
         setOperatorOnClickListener();
         // Find and set OnClickListener to function buttons
         setFunctionOnClickListener();
-
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawerid);
-        NavigationView navigationView =(NavigationView) findViewById(R.id.navid);
-        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
-
-        toggle = new ActionBarDrawerToggle(Scientific.this, drawerLayout,R.string.open,R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId()==R.id.homeid){
-            Intent intent = new Intent(Scientific.this,MainActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId()==R.id.calculator_id){
-            Intent in = new Intent(Scientific.this,MainActivity.class);
-            startActivity(in);
-        }
-        else if(item.getItemId()==R.id.sci_cal_id){
-            Intent i = new Intent(Scientific.this,Scientific.class);
-            startActivity(i);
-        }
-        return false;
+        dbCon=new dbCon();
+        reference= FirebaseDatabase.getInstance().getReference().child("dbCon");
+        btnEqual=(Button)findViewById(R.id.btnEqual);
     }
 
 
@@ -198,7 +161,13 @@ public class Scientific extends AppCompatActivity implements NavigationView.OnNa
         findViewById(R.id.btnEqual).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbCon.setResult(txtScreen.getText().toString().trim());
+                reference.push().setValue(dbCon);
+                Toast.makeText(Scientific.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
                 onEqual();
+                dbCon.setResult(txtScreen.getText().toString().trim());
+                reference.push().setValue(dbCon);
+                Toast.makeText(Scientific.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
             }
         });
     }
