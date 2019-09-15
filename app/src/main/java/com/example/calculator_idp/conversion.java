@@ -61,7 +61,7 @@ public class conversion extends AppCompatActivity {
 
         if(dollar.getText().toString().equals("")) {
             taka = (EditText) findViewById(R.id.etTaka);
-            int Taka = Integer.parseInt(taka.getText().toString());
+            Double Taka = Double.parseDouble(taka.getText().toString());
             Double Dollar = 0.012;
             double result = Taka * Dollar;
             dbCon.setResult(taka.getText().toString().trim());
@@ -77,7 +77,7 @@ public class conversion extends AppCompatActivity {
 
         else if(taka.getText().toString().equals("")){
             dollar = (EditText) findViewById(R.id.etDollar);
-            int Dollar = Integer.parseInt(dollar.getText().toString());
+            Double Dollar = Double.parseDouble(dollar.getText().toString());
             Double Taka = 84.50;
             double result = Taka * Dollar;
             dbCon.setResult(dollar.getText().toString().trim());
@@ -130,7 +130,7 @@ public class conversion extends AppCompatActivity {
 
         if(inch.getText().toString().equals("")) {
             feet = (EditText) findViewById(R.id.etFeet);
-            Double Feet = Double.parseDouble(taka.getText().toString());
+            Double Feet = Double.parseDouble(feet.getText().toString());
             Double Inch = 12.0;
             double result = Feet * Inch;
             dbCon.setResult(feet.getText().toString().trim());
