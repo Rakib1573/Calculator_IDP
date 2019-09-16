@@ -178,7 +178,7 @@ public class conversion extends AppCompatActivity {
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
             celcius = (EditText) findViewById(R.id.etCelcius);
-            celcius.setText(Double.toString(result) + " Celcius");
+            celcius.setText(Double.toString(result) + " Centimeter");
             dbCon.setResult(celcius.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
@@ -211,7 +211,7 @@ public class conversion extends AppCompatActivity {
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
             in = (EditText) findViewById(R.id.etIn);
-            in.setText(Double.toString(result) + " Celcius");
+            in.setText(Double.toString(result) + " Inch");
             dbCon.setResult(in.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
@@ -227,7 +227,7 @@ public class conversion extends AppCompatActivity {
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
             cm = (EditText) findViewById(R.id.etCm);
-            cm.setText(Double.toString(result) + " Farenhite");
+            cm.setText(Double.toString(result) + " Cm");
             dbCon.setResult(cm.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
