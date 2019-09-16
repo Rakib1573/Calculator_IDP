@@ -29,6 +29,10 @@ public class conversion extends AppCompatActivity {
     private EditText celcius;
     private Button convertfar;
 
+    private EditText cm;
+    private EditText in;
+    private Button convertCm;
+
 
     DatabaseReference reference;
     dbCon dbCon;
@@ -53,6 +57,9 @@ public class conversion extends AppCompatActivity {
         celcius=(EditText)findViewById(R.id.etCelcius);
 
 
+        convertCm=(Button)findViewById(R.id.btnConvertCm);
+        cm=(EditText)findViewById(R.id.etCm);
+        in=(EditText)findViewById(R.id.etIn);
 
         dbCon=new dbCon();
         reference= FirebaseDatabase.getInstance().getReference().child("dbCon");
@@ -189,6 +196,39 @@ public class conversion extends AppCompatActivity {
             farenhite = (EditText) findViewById(R.id.etFarenhite);
             farenhite.setText(Double.toString(result) + " Farenhite");
             dbCon.setResult(farenhite.getText().toString().trim());
+            reference.push().setValue(dbCon);
+            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
+        }
+    };
+
+    public void convertCm(View view) {
+        if(in.getText().toString().equals("")) {
+            cm = (EditText) findViewById(R.id.etCm);
+            double centimeter = Double.parseDouble (cm.getText().toString());
+            Double inch = 0.394;
+            double result = centimeter * inch;
+            dbCon.setResult(cm.getText().toString().trim());
+            reference.push().setValue(dbCon);
+            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
+            in = (EditText) findViewById(R.id.etIn);
+            in.setText(Double.toString(result) + " Celcius");
+            dbCon.setResult(in.getText().toString().trim());
+            reference.push().setValue(dbCon);
+            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
+        }
+
+
+        else if(cm.getText().toString().equals("")){
+            in = (EditText) findViewById(R.id.etIn);
+            double inch = Double.parseDouble (in.getText().toString());
+            Double centimeter = 2.54;
+            double result = inch * centimeter;
+            dbCon.setResult(in.getText().toString().trim());
+            reference.push().setValue(dbCon);
+            Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
+            cm = (EditText) findViewById(R.id.etCm);
+            cm.setText(Double.toString(result) + " Farenhite");
+            dbCon.setResult(cm.getText().toString().trim());
             reference.push().setValue(dbCon);
             Toast.makeText(conversion.this,"data inserted Successfully",Toast.LENGTH_LONG).show();
         }
